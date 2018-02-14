@@ -49,7 +49,8 @@ Particle.prototype = {
 		this.x +=this.vx;
 		this.y +=this.vy;
 		this.radius *= 0.97;
-		if(this.x <0 || this.x > screen_width || this.y > screen.height){
+		if(this.x <0 || this.x > window.innerWidth || this.y > window.innerHeight){
+			//this.x <0 || this.x > screen_width || this.y > screen.height
 			// console.log('移除');
 			this.isRemove = true;
 		}
@@ -115,7 +116,7 @@ const add = ()=>{
 		p.create();
 
 		particle_list.push(p);
-		// console.log('長度：',particle_list.length);
+		console.log('長度：',particle_list.length);
 	}
 }
 
@@ -126,13 +127,11 @@ const update = () => {
 
 	for (let i = 0; i < particle_list.length; i++) {
 		particle_list[i].update();
-
 		if (!particle_list[i].isRemove) {
 			list.push(particle_list[i]);
 		}
-
-		// particle_list = list;// 建立空的 list ，只把目前的粒子加入 list ，再把 list 塞給 particle_list。以保持粒子數量只有1顆
 	}
+	particle_list = list;// 建立空的 list ，只把目前的粒子加入 list ，再把 list 塞給 particle_list。以保持粒子數量只有1顆
 }
 
 const draw = ()=>{
