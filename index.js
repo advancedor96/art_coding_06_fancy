@@ -79,8 +79,10 @@ let init = function(){
 	canvas.height = screen_height;
 	ctx = canvas.getContext('2d');
 
-	// canvas.addEventListener('mousemove', updateMousePos, false);
+	// canvas.addEventListener('touchstart', updateTouchPos, false);
+	// canvas.addEventListener('touchmove', updateTouchMove, false);
 	canvas.addEventListener('click', updateMousePos, false);
+
 	window.addEventListener('resize', resize);
 	// canvas.addEventListener('mouseout', resetMousePos, false);
 
@@ -92,6 +94,20 @@ const resize = ()=>{
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 }
+// 加入下面2個，以及 82,83行的監聽事件，即可改成可以「仙女棒」
+// const updateTouchMove = (e)=>{
+// 	let touches = e.changedTouches;
+// 	mx = touches[0].pageX;
+// 	my = touches[0].pageY;
+// 	// base_h =  Math.floor( Math.random()*360  ); //移動時不需改變基底顏色
+// }
+// const updateTouchPos = (e)=>{
+// 	let touches = e.changedTouches;
+// 	console.log('touches',touches);
+// 	mx = touches[0].pageX;
+// 	my = touches[0].pageY;
+// 	base_h =  Math.floor( Math.random()*360  );
+// }
 const updateMousePos = function (e){
 	let rect = e.target.getBoundingClientRect();
 	mx = e.clientX - rect.left;
@@ -116,7 +132,7 @@ const add = ()=>{
 		p.create();
 
 		particle_list.push(p);
-		console.log('長度：',particle_list.length);
+		// console.log('長度：',particle_list.length);
 	}
 }
 
